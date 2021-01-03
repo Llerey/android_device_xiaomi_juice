@@ -638,4 +638,6 @@ PRODUCT_PACKAGES += \
     WifiResCommon \
     AospWifiResOverlay
 
-
+# Dirac
+PRODUCT_PACKAGES += \
+    Dirac
