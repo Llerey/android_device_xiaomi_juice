@@ -294,7 +294,7 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power-service-qti
+    android.hardware.power-service.xiaomi-libperfmgr
 
 # Power Stats
 PRODUCT_PACKAGES += \
