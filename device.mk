@@ -585,6 +585,12 @@ PRODUCT_PACKAGES += \
     rmnetctl \
     rmnetcli
 
+# Thermal
+PRODUCT_PACKAGES += \
+    android.hardware.thermal@1.0-impl \
+    android.hardware.thermal@1.0-service \
+    thermal.bengal
+
 # NFC
 PRODUCT_PACKAGES += \
     android.hardware.nfc@1.0 \
