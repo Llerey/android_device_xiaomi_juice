@@ -25,3 +25,8 @@ PRODUCT_MODEL := sm6115
 PRODUCT_MANUFACTURER := Xiaomi
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
+
+# Fluid
+PRODUCT_PRODUCT_PROPERTIES += \
+  ro.fluid.maintainer=Sezam4ik \
+  ro.fluid.cpu=SD662
