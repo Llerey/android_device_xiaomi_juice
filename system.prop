@@ -74,3 +74,6 @@ persist.vendor.ssr.restart_level=ALL_ENABLE
 
 # Zygote
 persist.device_config.runtime_native.usap_pool_enabled=true
+
+# RescueParty
+persist.sys.disable_rescue=true
