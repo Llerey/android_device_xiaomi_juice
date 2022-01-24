@@ -14,8 +14,10 @@ TARGET_USES_BLUR := true
 USE_PIXEL_CHARGING := true
 
 # Gapps
-#WITH_GAPPS := true
-#TARGET_GAPPS_ARCH := arm64
+IS_PHONE := true
+TARGET_INCLUDE_GAPPS := true
+TARGET_GAPPS_ARCH := arm64
+TARGET_SUPPORTS_GOOGLE_RECORDER := true
 
 # Device identifier. This must come after all inclusions.
 PRODUCT_NAME := fluid_juice
