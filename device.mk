@@ -633,11 +633,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_BOOT_JARS += \
     telephony-ext
 
-# Overlays
-PRODUCT_PACKAGES += \
-    WifiResCommon \
-    AospWifiResOverlay
-
 # Dirac
 PRODUCT_PACKAGES += \
     Dirac
