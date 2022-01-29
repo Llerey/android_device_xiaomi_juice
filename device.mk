@@ -30,6 +30,7 @@ PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
     vendor/qcom/opensource/dataservices \
     vendor/qcom/opensource/data-ipa-cfg-mgr \
+    hardware/xiaomi \
 
 # Add default implementation of fastboot HAL.
 PRODUCT_PACKAGES += android.hardware.fastboot@1.0-impl-mock
@@ -632,6 +633,13 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_BOOT_JARS += \
     telephony-ext
+
+# Overlays
+PRODUCT_PACKAGES += \
+    framework \
+    SystemUI \
+    WifiResCommon \
+    AospWifiResOverlay
 
 # Dirac
 PRODUCT_PACKAGES += \
