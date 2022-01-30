@@ -1450,6 +1450,9 @@ vendor/etc/thermal-chg-only.conf
 vendor/etc/thermal-nolimits.conf
 vendor/etc/thermal-phone.conf
 vendor/etc/thermald-devices.conf
+vendor/etc/thermal-camera.conf
+vendor/etc/thermal-map.conf
+vendor/etc/thermal-normal.conf
 vendor/bin/mi_thermald
 vendor/etc/init/init_thermal-engine.rc
 -vendor/lib/libthermalclient.so
