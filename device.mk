@@ -31,7 +31,7 @@ PRODUCT_SOONG_NAMESPACES += \
     vendor/qcom/opensource/dataservices \
     vendor/qcom/opensource/data-ipa-cfg-mgr \
     hardware/xiaomi \
-
+    packages/apps/Bluetooth
 # Add default implementation of fastboot HAL.
 PRODUCT_PACKAGES += android.hardware.fastboot@1.0-impl-mock
 PRODUCT_PACKAGES += fastbootd
@@ -130,7 +130,8 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0.vendor \
     android.hardware.bluetooth@1.1.vendor \
     android.hardware.bluetooth.audio@2.0-impl \
-    android.hardware.bluetooth.a2dp@1.0-impl
+    android.hardware.bluetooth.a2dp@1.0-impl \
+    com.qualcomm.qti.bluetooth_audio@1.0.vendor
 
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.bluetooth_audio@2.0.vendor \
