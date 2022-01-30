@@ -102,9 +102,6 @@ vendor/etc/acdbdata/QRD/QRD_Headset_cal.acdb
 vendor/etc/acdbdata/QRD/QRD_Speaker_cal.acdb
 vendor/etc/acdbdata/QRD/QRD_workspaceFile.qwsp
 
-# Batterysecret
-vendor/bin/batterysecret
-
 # Bluetooth from SM8250-COMMON
 vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
 vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc
@@ -121,10 +118,6 @@ vendor/lib64/hw/android.hardware.bluetooth.audio@2.0-impl.so
 vendor/lib64/hw/vendor.qti.hardware.bluetooth_sar@1.1-impl.so
 vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.0.so
 vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.1.so
-
-# Bluetooth (aptX) - from crosshatch - RQ1A.201205.003
-system_ext/lib64/libaptXHD_encoder.so
-system_ext/lib64/libaptX_encoder.so
 
 # CDSP
 vendor/bin/cdsprpcd
@@ -533,8 +526,6 @@ vendor/lib64/libmmcamera_mfnr_t4.so
 vendor/bin/hvdcp_opti
 
 # Configstore
-
-# Configstore
 vendor/bin/hw/android.hardware.configstore@1.1-service
 vendor/bin/hw/vendor.qti.hardware.capabilityconfigstore@1.0-service
 vendor/etc/init/android.hardware.configstore@1.1-service.rc
@@ -708,6 +699,7 @@ vendor/lib64/libgf_hal.so
 vendor/lib64/libgoodixhwfingerprint.so
 vendor/lib64/libvendor.goodix.hardware.biometrics.fingerprint@2.1.so
 vendor/lib64/vendor.qti.hardware.fingerprint@1.0.so
+
 # Firmware
 vendor/firmware/a610_zap.b00
 vendor/firmware/a610_zap.b01
@@ -745,6 +737,8 @@ vendor/firmware/nt33672a_tianma_novatek_ts_fw.bin
 vendor/firmware/nt33672a_tianma_novatek_ts_mp.bin
 vendor/firmware/nt33672d_tianma_novatek_ts_fw.bin
 vendor/firmware/nt33672d_tianma_novatek_ts_mp.bin
+vendor/firmware/nt33672a_truly_novatek_ts_fw.bin
+vendor/firmware/nt33672a_truly_novatek_ts_mp.bin
 vendor/firmware/nt33672d_xinli_novatek_ts_fw.bin
 vendor/firmware/nt33672d_xinli_novatek_ts_mp.bin
 vendor/firmware/st21nfc_fw.bin
@@ -1187,7 +1181,6 @@ vendor/radio/qcril_database/upgrade/3_version_update_wps_config.sql
 vendor/radio/qcril_database/upgrade/4_version_update_ecc_table.sql
 vendor/radio/qcril_database/upgrade/5_version_update_ecc_table.sql
 vendor/radio/qcril_database/upgrade/6_version_update_ecc_table.sql
-vendor/radio/qcril_database/upgrade/7_version_update_ecc_table.sql
 
 # Radio-IMS
 system_ext/lib64/lib-imsvideocodec.so
@@ -1603,8 +1596,6 @@ system_ext/lib64/libgralloc.qti.so
 system_ext/lib64/libqdMetaData.so
 system_ext/lib64/libqti_vndfwk_detect.so
 system_ext/lib64/vendor.qti.diaghal@1.0.so
--system_ext/priv-app/CbrsNetworkMonitor/CbrsNetworkMonitor.apk
--system_ext/priv-app/SimpleDeviceConfig/SimpleDeviceConfig.apk
 vendor/bin/adpl
 vendor/bin/applypatch
 vendor/bin/boringssl_self_test32
