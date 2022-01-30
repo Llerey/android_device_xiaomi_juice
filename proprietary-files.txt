@@ -524,6 +524,9 @@ vendor/lib64/libmmcamera_mfnr_t4.so
 
 # Charger
 vendor/bin/hvdcp_opti
+vendor/bin/init.qti.chg_policy.sh
+vendor/etc/charger_fstab.qti
+vendor/etc/init/vendor.qti.hardware.charger_monitor@1.0-service.rc
 
 # Configstore
 vendor/bin/hw/android.hardware.configstore@1.1-service
