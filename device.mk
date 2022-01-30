@@ -175,6 +175,9 @@ PRODUCT_PACKAGES += \
     libgui_vendor \
     libxml2
 
+# Charger
+PRODUCT_PACKAGES += \ libsuspend
+
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.1 \
