@@ -389,19 +389,25 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media/system_properties.xml:$(TARGET_COPY_OUT_VENDOR)/etc/system_properties.xml
 
 # Sensors
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.sensors.hal_trigger_ssr=false \
+    persist.vendor.sensors.odl.adsp=true \
+    persist.vendor.sensors.enable.rt_task=false \
+    persist.vendor.sensors.support_direct_channel=false \
+    persist.vendor.sensors.enable.bypass_worker=true
+
 PRODUCT_PACKAGES += \
     android.hardware.sensors@2.0-service.multihal \
     android.hardware.sensors@1.0 \
     android.hardware.sensors@1.0-impl \
     android.hardwade.sensors@2.0 \
-    android.hardware.sensors@2.0-impl
+    android.hardware.sensors@2.0-impl \
 
 PRODUCT_PACKAGES += \
     libsensorndkbridge
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
-
 # Fstab
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/fstab.default:$(TARGET_COPY_OUT_RAMDISK)/fstab.default
