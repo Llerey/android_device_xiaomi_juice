@@ -158,10 +158,8 @@ vendor.display.qdcm.disable_factory_mode=1
 vendor.display.qdcm.mode_combine=1
 vendor.display.use_layer_ext=0
 vendor.display.use_smooth_motion=1
-debug.sf.disable_backpressure=1
 debug.sf.hw=1
 ebug.sf.enable_hwc_vds=1
-debug.sf.latch_unsignaled=0
 
 # DRM
 drm.service.enabled=true
@@ -181,20 +179,16 @@ persist.backup.ntpServer=0.pool.ntp.org
 
 # Graphics
 debug.egl.hw=0
-debug.mdpcomp.logs=0
 debug.sf.enable_advanced_sf_phase_offset=1
 debug.sf.enable_gl_backpressure=1
 debug.sf.high_fps_early_gl_phase_offset_ns=-4000000
 debug.sf.high_fps_early_phase_offset_ns=-4000000
 debug.sf.high_fps_late_app_phase_offset_ns=1000000
 debug.sf.high_fps_late_sf_phase_offset_ns=-4000000
-debug.hwui.renderer=skiagl
 persist.demo.hdmirotationlock=false
 persist.sys.sf.color_mode=9
 persist.sys.sf.color_saturation=1.0
 persist.sys.sf.native_mode=2
-ro.hardware.egl=adreno
-ro.hardware.vulkan=adreno
 ro.opengles.version=196610
 vendor.gralloc.disable_ubwc=0
 
@@ -269,6 +263,4 @@ ro.config.vc_call_vol_steps=10
 # WiFi
 wifi.aware.interface=wifi-aware0
 
-# Graphics
-debug.sdm.support_writeback=0
 
