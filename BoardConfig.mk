@@ -78,6 +78,9 @@ TARGET_USES_ION := true
 # Screen Density
 TARGET_SCREEN_DENSITY := 480
 
+# SurfaceFlinger
+TARGET_USE_AOSP_SURFACEFLINGER := true
+
 # HWUI
 HWUI_COMPILE_FOR_PERF := true
 
