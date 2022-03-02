@@ -4,9 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+# GSI keys
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
 # Setup dalvik vm configs
@@ -32,6 +30,7 @@ PRODUCT_SOONG_NAMESPACES += \
     vendor/qcom/opensource/data-ipa-cfg-mgr \
     hardware/xiaomi \
     packages/apps/Bluetooth
+
 # Add default implementation of fastboot HAL.
 PRODUCT_PACKAGES += android.hardware.fastboot@1.0-impl-mock
 PRODUCT_PACKAGES += fastbootd
@@ -49,47 +48,43 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    android.hardware.audio.common@6.0 \
-    android.hardware.audio.common@6.0-util \
-    android.hardware.audio.effect@6.0 \
+    android.hardware.audio@6.0-impl \
     android.hardware.audio.effect@6.0-impl \
     android.hardware.audio.service \
-    android.hardware.audio@2.0-service \
-    android.hardware.audio@2.0-impl \
-    android.hardware.audio@6.0 \
-    android.hardware.audio@6.0-impl \
+    android.hardware.bluetooth.audio@2.0-impl \
+    android.hardware.soundtrigger@2.3-impl
 
 PRODUCT_PACKAGES += \
-    vendor.qti.hardware.audiohalext@1.0 \
-    vendor.qti.hardware.audiohalext@1.0.vendor\
-    vendor.qti.hardware.audiohalext-utils
-
-PRODUCT_PACKAGES += \
-    audio.a2dp.bengal \
     audio.a2dp.default \
+    audio.bluetooth.default \
     audio.primary.bengal \
-    audio.primary.default \
     audio.r_submix.default \
     audio.usb.default \
 
 PRODUCT_PACKAGES += \
-    libaudio-resampler \
+    liba2dpoffload \
+    libaudiopreprocessing \
     libbatterylistener \
-    libcirrusspkrprot \
+    libbundlewrapper \
     libcomprcapture \
+    libdownmix \
+    libdynproc \
+    libeffectproxy \
     libexthwplugin \
     libhdmiedid \
     libhfp \
+    libldnhncr \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
+    libreverbwrapper \
     libsndmonitor \
     libspkrprot \
-    libtinycompress \
-    libtinycompress.vendor \
+    libvisualizer \
     libvolumelistener
 
 PRODUCT_COPY_FILES += \
+    hardware/qcom-caf/sm8250/audio/configs/bengal/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
@@ -99,51 +94,34 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/audio/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
-    $(LOCAL_PATH)/configs/audio/audio_configs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_configs.xml \
-    $(LOCAL_PATH)/configs/audio/audio_configs_stock.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_configs_stock.xml \
-    $(LOCAL_PATH)/configs/audio/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
-    $(LOCAL_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
-    $(LOCAL_PATH)/configs/audio/audio_io_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_io_policy.conf \
-    $(LOCAL_PATH)/configs/audio/audio_log.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/audio_log.cfg \
-    $(LOCAL_PATH)/configs/audio/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
-    $(LOCAL_PATH)/configs/audio/audio_platform_info_idp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_idp.xml \
-    $(LOCAL_PATH)/configs/audio/audio_platform_info_intcodec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_intcodec.xml \
-    $(LOCAL_PATH)/configs/audio/audio_platform_info_scubaidp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_scubaidp.xml \
-    $(LOCAL_PATH)/configs/audio/audio_platform_info_scubaqrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_scubaqrd.xml \
-    $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
-    $(LOCAL_PATH)/configs/audio/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
-    $(LOCAL_PATH)/configs/audio/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
-    $(LOCAL_PATH)/configs/audio/mixer_paths_idp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_idp.xml \
-    $(LOCAL_PATH)/configs/audio/mixer_paths_scubaidp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_scubaidp.xml \
-    $(LOCAL_PATH)/configs/audio/mixer_paths_scubaqrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_scubaqrd.xml \
-    $(LOCAL_PATH)/configs/audio/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
-    $(LOCAL_PATH)/configs/audio/sound_trigger_mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_mixer_paths.xml \
-    $(LOCAL_PATH)/configs/audio/sound_trigger_mixer_paths_idp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_mixer_paths_idp.xml \
-    $(LOCAL_PATH)/configs/audio/sound_trigger_mixer_paths_scubaidp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_mixer_paths_scubaidp.xml \
-    $(LOCAL_PATH)/configs/audio/sound_trigger_mixer_paths_scubaqrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_mixer_paths_scubaqrd.xml \
-    $(LOCAL_PATH)/configs/audio/sound_trigger_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_platform_info.xml \
-    $(LOCAL_PATH)/configs/audio/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/audio/,$(TARGET_COPY_OUT_VENDOR)/etc)
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0.vendor \
-    android.hardware.bluetooth@1.1.vendor \
-    android.hardware.bluetooth.audio@2.0-impl \
-    android.hardware.bluetooth.a2dp@1.0-impl \
-    com.qualcomm.qti.bluetooth_audio@1.0.vendor
-
-PRODUCT_PACKAGES += \
-    vendor.qti.hardware.bluetooth_audio@2.0.vendor \
+    audio.bluetooth.default \
+    android.hardware.bluetooth.audio@2.1 \
+    com.dsi.ant@1.0.vendor \
+    com.qualcomm.qti.bluetooth_audio@1.0.vendor \
+    libbluetooth_audio_session \
+    vendor.qti.hardware.bluetooth_audio@2.1.vendor \
     vendor.qti.hardware.btconfigstore@1.0.vendor \
     vendor.qti.hardware.btconfigstore@2.0.vendor
 
 PRODUCT_PACKAGES += \
-    libldacBT_enc \
-    libldacBT_abr \
-    libbt-vendor
+    android.hardware.bluetooth@1.0 \
+    android.hardware.bluetooth@1.0.vendor
 
-PRODUCT_PACKAGES += bt-mac-generator
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.qcom.bluetooth.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldac \
+    persist.vendor.qcom.bluetooth.aac_vbr_ctl.enabled=true \
+    persist.vendor.qcom.bluetooth.enable.splita2dp=true \
+    persist.vendor.qcom.bluetooth.scram.enabled=false \
+    persist.vendor.qcom.bluetooth.soc=cherokee \
+    persist.vendor.qcom.bluetooth.twsp_state.enabled=false \
+    persist.vendor.btstack.enable.splita2dp=true \
+    persist.vendor.btstack.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldac \
+    ro.vendor.bluetooth.wipower=false \
+    vendor.qcom.bluetooth.soc=cherokee
 
 # Perf
 PRODUCT_PACKAGES += \
@@ -155,87 +133,44 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    android.hardware.camera.common@1.0 \
     android.hardware.camera.provider@2.4-impl \
     android.hardware.camera.provider@2.4-service_64 \
-    android.hardware.camera.provider@2.4-external \
-    android.hardware.camera.provider@2.4-legacy \
-    android.hardware.camera.provider@2.5 \
-    android.hardware.camera.provider@2.6 \
-    android.hardware.camera.device@1.0 \
-    android.hardware.camera.device@3.2 \
-    android.hardware.camera.device@3.3 \
-    android.hardware.camera.device@3.4 \
-    android.hardware.camera.device@3.5 \
-    android.hardware.camera.device@3.6
-
-PRODUCT_PACKAGES += \
-   vendor.qti.hardware.camera.postproc@1.0.vendor
-
-PRODUCT_PACKAGES += \
+    vendor.qti.hardware.camera.postproc@1.0.vendor \
+    vendor.qti.hardware.camera.postproc@1.0.vendor \
     libcamera2ndk_vendor \
     libdng_sdk.vendor \
     libstdc++.vendor \
-    libgui_vendor \
     libxml2
 
 # Charger
-PRODUCT_PACKAGES += \ libsuspend
+PRODUCT_PACKAGES += libsuspend
 
 # Display
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.composer@2.1 \
-    android.hardware.graphics.composer@2.1-impl \
-    android.hardware.graphics.composer@2.2 \
-    android.hardware.graphics.composer@2.2-impl \
-    android.hardware.graphics.composer@2.3 \
-    android.hardware.graphics.composer@2.3-impl \
-    android.hardware.graphics.composer@2.4 \
-    android.hardware.graphics.composer@2.4-impl \
-    android.hardware.graphics.allocator@2.0 \
-    android.hardware.graphics.allocator@3.0 \
-    android.hardware.graphics.allocator@4.0 \
     android.hardware.graphics.mapper@3.0-impl-qti-display \
     android.hardware.graphics.mapper@4.0-impl-qti-display \
     android.hardware.memtrack@1.0-impl \
-    android.hardware.memtrack@1.0-service
-
-PRODUCT_PACKAGES += \
-    vendor.display.config@1.15 \
-    vendor.display.config@1.15.vendor \
-    vendor.display.config@2.0 \
-    vendor.display.config@2.0.vendor \
-    vendor.qti.hardware.display.composer-service \
-    vendor.qti.hardware.display.composer@1.0.vendor \
-    vendor.qti.hardware.display.composer@2.0.vendor \
-    vendor.qti.hardware.display.composer@3.0 \
-    vendor.qti.hardware.display.composer@3.0.vendor \
-    vendor.qti.hardware.display.allocator-service \
-    vendor.qti.hardware.display.allocator@1.0.vendor \
-    vendor.qti.hardware.display.allocator@3.0.vendor \
-    vendor.qti.hardware.display.allocator@4.0.vendor \
-    vendor.qti.hardware.display.mapper@1.1.vendor \
-    vendor.qti.hardware.display.mapper@2.0.vendor \
-    vendor.qti.hardware.display.mapper@3.0.vendor \
-    vendor.qti.hardware.display.mapper@4.0.vendor \
-    vendor.qti.hardware.capabilityconfigstore@1.0-service \
-    vendor.qti.hardware.capabilityconfigstore@1.0.vendor
-
-PRODUCT_PACKAGES += \
-    memtrack.bengal \
-    gralloc.bengal \
-    hwcomposer.bengal \
-
-PRODUCT_PACKAGES += \
+    android.hardware.memtrack@1.0-service \
     libdisplayconfig.qti \
     libdisplayconfig.qti.vendor \
     libqdMetaData \
     libsdmcore \
     libsdmutils \
-    libtinyxml
-
-PRODUCT_PACKAGES += \
-    libvulkan
+    libtinyxml \
+    libvulkan \
+    vendor.display.config@1.5 \
+    vendor.display.config@1.11.vendor \
+    vendor.display.config@2.0 \
+    vendor.display.config@2.0.vendor \
+    vendor.qti.hardware.display.allocator-service \
+    vendor.qti.hardware.display.composer-service \
+    vendor.qti.hardware.display.mapper@1.1.vendor \
+    vendor.qti.hardware.display.mapper@2.0.vendor \
+    vendor.qti.hardware.display.mapper@3.0.vendor \
+    vendor.qti.hardware.display.mapper@4.0.vendor \
+    memtrack.bengal \
+    gralloc.bengal \
+    hwcomposer.bengal
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml \
@@ -285,8 +220,8 @@ PRODUCT_PACKAGES += \
 
 # Health
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.1-impl-qti \
-    android.hardware.health@2.1-service
+    android.hardware.health@2.0-impl \
+    android.hardware.health@2.0-service
 
 # Atrace
 PRODUCT_PACKAGES += \
@@ -521,6 +456,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config \
     $(LOCAL_PATH)/configs/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
 
+# WLAN
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
     hostapd \
@@ -558,7 +494,6 @@ PRODUCT_PACKAGES += \
 
 # RIL
 PRODUCT_PACKAGES += \
-    CarrierConfigOverlay \
     libjson \
     libril \
     librilutils \
@@ -566,17 +501,11 @@ PRODUCT_PACKAGES += \
     rmnetctl \
     rmnetcli
 
-# Thermal
-PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.0-impl \
-    android.hardware.thermal@1.0-service \
-    thermal.bengal
-
 # NFC
 PRODUCT_PACKAGES += \
-    android.hardware.nfc@1.0 \
-    android.hardware.nfc@1.0-service \
-    android.hardware.secure_element@1.0-service \
+    android.hardware.nfc@1.2 \
+    android.hardware.nfc@1.2-service \
+    android.hardware.secure_element@1.2-service \
     NfcNci \
     Tag \
     SecureElement \
@@ -620,10 +549,3 @@ PRODUCT_PACKAGES += \
     SystemUI \
     WifiResCommon \
     AospWifiResOverlay
-
-# Dirac
-PRODUCT_PACKAGES += \
-    Dirac
-
-# path to Dirac
-$(call inherit-product, vendor/xiaomi/dirac/dirac.mk)

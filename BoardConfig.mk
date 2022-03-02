@@ -18,14 +18,12 @@ TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := generic
-TARGET_CPU_VARIANT_RUNTIME := cortex-a73
 
 TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv8-a
+TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := generic
-TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a73
+TARGET_2ND_CPU_VARIANT := cortex-a9
 
 TARGET_USES_64_BIT_BINDER := true
 
@@ -86,7 +84,6 @@ HWUI_COMPILE_FOR_PERF := true
 
 # HIDL
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/configs/manifest/manifest.xml
-DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/configs/manifest/vendor.qti.hardware.btconfigstore.xml
 DEVICE_MATRIX_FILE := $(DEVICE_PATH)/configs/manifest/compatibility_matrix.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/configs/manifest/framework_compatibility_matrix.xml
 
@@ -100,19 +97,6 @@ TARGET_TAP_TO_WAKE_NODE := "/sys/touchpanel/double_tap"
 # Power
 TARGET_USES_INTERACTION_BOOST := true
 TARGET_POWERHAL_MODE_EXT := $(DEVICE_PATH)/power/power-mode.cpp
-
-# Dex
-ifeq ($(HOST_OS),linux)
-    ifneq ($(TARGET_BUILD_VARIANT),eng)
-        ifeq ($(WITH_DEXPREOPT),)
-            WITH_DEXPREOPT := true
-            WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
-        endif
-    endif
-endif
-DONT_DEXPREOPT_PREBUILTS := true
-USE_DEX2OAT_DEBUG := true
-WITH_DEXPREOPT_DEBUG_INFO := false
 
 # DRM
 TARGET_ENABLE_MEDIADRM_64 := true
@@ -134,7 +118,6 @@ BOARD_KERNEL_CMDLINE := \
     androidboot.console=ttyMSM0 \
     androidboot.memcg=1 \
     lpm_levels.sleep_disabled=1 \
-    video=vfb:640x400,bpp=32,memsize=3072000 \
     msm_rtb.filter=0x237 \
     service_locator.enable=1 \
     swiotlb=2048 \
@@ -149,25 +132,23 @@ BOARD_RAMDISK_OFFSET := 0x01000000
 BOARD_KERNEL_SECOND_OFFSET := 0xf00000
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_KERNEL_OFFSET := 0x00008000
-BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
-BOARD_KERNEL_SEPARATED_DTBO := false
+BOARD_KERNEL_IMAGE_NAME := Image.gz
+BOARD_KERNEL_SEPARATED_DTBO := true
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADERS := kernel/xiaomi/juice
-TARGET_KERNEL_CONFIG := vendor/mibengal_defconfig
 
-TARGET_PREBUILT_DTB := $(DEVICE_PATH)/configs/prebuilt/dtb
-BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/configs/prebuilt/dtbo.img
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 BOARD_BOOTIMG_HEADER_VERSION := 2
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --kernel_offset $(BOARD_KERNEL_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --second_offset $(BOARD_KERNEL_SECOND_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --base $(BOARD_KERNEL_BASE)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
-
-# Toolchain GCC
-#KERNEL_TOOLCHAIN := $(PWD)/prebuilts/gcc/linux-x86/aarch64/aarch64-elf/bin
-#TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-elf-
-
-# Toolchain Clang
-TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_CLANG_VERSION := proton
+BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE) --board ""
 
 # HWUI
 HWUI_COMPILE_FOR_PERF := true
